@@ -1,13 +1,30 @@
-<?php
-$valor=$_POST['valor'];
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Laboratorio 4.3</title>
+</head>
 
-$i;
-$factorial=$valor;
+<body>
+<h3>Cantidad de Vocales</h3>
 
-for ($i=1;$i<=$valor;$i++){
-	$factorial=$i*$factorial;
-}
-echo "<h3>Calculo Factorial</h3>";
-echo "El factorial de ".$valor." es: ".$factorial."";
-	
+<?PHP
+	if(array_key_exists('Enviar', $_POST)){
+		if ($_REQUEST['Texto'] !="")
+		{
+			echo "El Texto es $_REQUEST[Texto]";
+			echo "<br>";
+			echo "La cantidad de vocales son:";
+		}
+
+		dibuja_formulario();
+	}
+		function dibuja_formulario ($Texto="")
+		{
+		echo "<FORM ACTION ='lab43.php' METHOD = 'POST'>";
+		echo "Nombre: <INPUT TYPE= 'TEXT' NAME='Ingrese el Texto'>$texto <br>";
+		echo "<INPUT TYPE= 'SUBMIT' NAME='Enviar' VALUE='Enviar datos'></FORM>";
+		}
+		
 ?>
+</body>
+</html>
