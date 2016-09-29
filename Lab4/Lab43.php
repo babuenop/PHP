@@ -1,30 +1,34 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <head>
-<title>Laboratorio 4.3</title>
+<title>laboratorio 4.3</title>
 </head>
-
 <body>
-<h3>Cantidad de Vocales</h3>
-
-<?PHP
-	if(array_key_exists('Enviar', $_POST)){
-		if ($_REQUEST['Texto'] !="")
-		{
-			echo "El Texto es $_REQUEST[Texto]";
-			echo "<br>";
-			echo "La cantidad de vocales son:";
-		}
-
-		dibuja_formulario();
-	}
-		function dibuja_formulario ($Texto="")
-		{
-		echo "<FORM ACTION ='lab43.php' METHOD = 'POST'>";
-		echo "Nombre: <INPUT TYPE= 'TEXT' NAME='Ingrese el Texto'>$texto <br>";
-		echo "<INPUT TYPE= 'SUBMIT' NAME='Enviar' VALUE='Enviar datos'></FORM>";
-		}
+<form name="contar" method="POST" action="lab43.php")>
+<h3>Contar de Vocales</h3><br>
+Introduzca un texto: <input type="text" name="texto" value="">
+<br><br>
+<input value="Contar" name='enviar' type="submit" />
+</form>
+<?php
+if(array_key_exists('enviar', $_POST)){
+	if ($_REQUEST['texto'] != "") {
+	
+function verificar($vocales, $texto){
+	$contador=0;
+	foreach ($vocales as $vocal) {
 		
+		$contador += substr_count($texto, $vocal);
+	}
+	echo "Ingreso ".$contador." vocales";
+}
+$vocales = array('a','e','i','o','u');
+$texto = $_POST['texto'];
+verificar($vocales, $texto);
+}else
+	{
+		echo "El texto esta vacio";
+	}
+}
 ?>
 </body>
 </html>

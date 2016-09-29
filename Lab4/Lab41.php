@@ -1,5 +1,5 @@
 <?php
-$ventas = 200;
+$ventas = 100;
 $valor = $_POST['valor'];
 $porcentaje = $valor/$ventas;
 
