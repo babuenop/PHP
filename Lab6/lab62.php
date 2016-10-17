@@ -1,13 +1,25 @@
 <html lang="es">
 <head>
-	<title>Laboratorio 6.1</title>
+	<title>Laboratorio 6.2</title>
 	<LINK REL="stylesheet" TYPE="text/css" HREF="http://localhost/DS7/Lab6/css/estilo.css">
 	
 </head>
 
 <body>
 <H1> Consulta de noticias </H1>
-<BR/><BR/>
+
+<FORM NAME="FormFiltro" METHOD ="post" ACTION="lab62.php">
+<br>
+Filtrar por: <SELECT NAME="campos">
+<OPTION VALUE="texto" SELECTED>Texto
+<OPTION VALUE="titulo" SELECTED>Titulo 
+<OPTION VALUE="categoria" SELECTED>Categoria
+</select>
+Con el valor
+<input TYPE="text" NAME="valor">
+<input Name="ConsultarFiltro" value="Filtrar datos" TYPE="Submit">
+<input Name="ConsultarTodos" value="Ver todos" TYPE="Submit">
+</FORM>
 
 <?php
 
@@ -17,7 +29,20 @@ $conexion = mysqli_connect ("localhost","root","")
 mysqli_select_db ($conexion, "labsdb")
 	or die("No se puede seleccionar la base de datos");
 
-$instruccion = "CALL sp_listar_noticias();";
+$instruccion = "CALL sp_listar_noticias(); ";
+
+if(array_key_exists('ConsultarTodos', $_POST)){
+	$instrucion = "CALL sp_listar_noticias(); ";
+}
+if(array_key_exists('ConsultarFiltro',$_POST)){
+	if($_REQUEST['valor']!=""){
+		$instruccion = "CALL sp_listar_noticias_filtro('".$_REQUEST['campos']."','".$_REQUEST['valor']."'); ";
+	}
+	else{
+		$instruccion = "CALL sp_listar_noticias_filtro('".$_REQUEST['campos']."','&nbsp');";
+	}
+}
+	
 $consulta = mysqli_query ($conexion, $instruccion)
 	or die("Fallo en la consulta". mysqli_error($conexion));
 
@@ -27,9 +52,9 @@ if($nfilas > 0)
 {
 	print("<TABLE> \n ");
 	print("<TR> \n");
-	print("<TH>Titulos</TH> \n");
+	print("<TH>Titulo</TH> \n");
 	print("<TH>Texto</TH> \n");
-	print("<TH>Categorias</TH> \n");
+	print("<TH>Categoria</TH> \n");
 	print("<TH>Fechas</TH> \n" );
 	print("<TH>Imagen</TH> \n");
 	print("</TR>\n");
