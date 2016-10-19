@@ -45,3 +45,24 @@ PREPARE stmt FROM @s;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 END
+
+--LABORATORIO 7 
+
+--Proceso Almacenado 1
+CREATE DEFINER = `root`@`localhost` PROCEDURE `sp_listar_votos`()
+BEGIN 
+SELECT votos1, votos2 FROM votos;
+END;
+
+--Proceso Almacenado 2 
+CREATE DEFINER = `root`@`localhost` PROCEDURE `sp_actualizar_votos`(
+IN param_votos1 VARCHAR(255),
+IN param_votos2 VARCHAR(255),
+)
+BEGIN 
+SET @s = concat ("update votos set votos1=", param_votos1,"votos2=", param_votos2);
+
+PREPARE stmt FROM @s;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+END;

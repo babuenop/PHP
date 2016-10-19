@@ -73,7 +73,7 @@ if($nfilas > 0)
 		}
 		else
 		{
-			print("<TD>&nbps;</TD>\n");
+			print("<TD>&nbps</TD>\n");
 		}	
 		print("</TR>\n");
 	}
