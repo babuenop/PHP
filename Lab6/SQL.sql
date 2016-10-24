@@ -21,8 +21,7 @@ INSERT INTO NOTICIAS VALUES (3, 'Apartementos en el puerto de san martin',
 'En la playa del sol en primera linea de playa. Pisos reformados y completamente acabados', 
 'costas','2016-02-06', 'apartamento8.jpg')
 
-INSERT INTO NOTICIAS VALUES (4, 'Casa reformada en el barrio la palmera', 
-'Dos plantas y atico', '5 habitaciones, patio interno, amplio garaje. Situada en una calle tranquila y a un paso del centro historico.',
+INSERT INTO NOTICIAS VALUES (6, 'Casa reformada en el barrio la palmera','Dos plantas y atico', '5 habitaciones, patio interno, amplio garaje. Situada en una calle tranquila y a un paso del centro historico.',
 'promociones', '2016-02-07', null)
 
 INSERT INTO NOTICIAS VALUES (5, 'Promocion costa del mar', 'Con vistas al campo de Golf, magnificas calidades, entorno ajardinado con piscina, y servicio de vigilancia.', 

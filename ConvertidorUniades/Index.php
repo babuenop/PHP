@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <head>
 <title>Parcial 1</title>
-<link href="http://localhost/op/ds.eldiariodebetto.com/css/customer-comp.css" rel="stylesheet">
+
+<link href="http://localhost/DS7/Lab7/rl-php/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
 <form name="contar" method="POST" action="index.php")>
