@@ -56,10 +56,10 @@ END;
 --Proceso Almacenado 2 
 CREATE DEFINER = `root`@`localhost` PROCEDURE `sp_actualizar_votos`(
 IN param_votos1 VARCHAR(255),
-IN param_votos2 VARCHAR(255),
+IN param_votos2 VARCHAR(255)
 )
 BEGIN 
-SET @s = concat ("update votos set votos1=", param_votos1,"votos2=", param_votos2);
+SET @s = concat ("UPDATE votos SET votos1=", param_votos1 ,", votos2=", param_votos2);
 
 PREPARE stmt FROM @s;
 EXECUTE stmt;
