@@ -46,7 +46,7 @@ if(array_key_exists('enviar',$_POST))
 	mysqli_close($conexion);
 	
 	print ("<p>Su voto ha sido registrado. Gracias por participar</p>\n");
-	print ("<A HREF='lab72.php'>Ver resultados</A>\n");
+	print ("<A HREF='Encuesta.php'>Ver resultados</A>\n");
 	}
 	else
 	{
@@ -57,10 +57,12 @@ if(array_key_exists('enviar',$_POST))
 <P>¿Cree usted que el precio de la vivienda seguira subiendo al ritmo actual?</p>
 
 <FORM action="lab71.php" method="POST">
-	<INPUT TYPE="RADIO" NAME="voto" VALUE="si" CHECKED>Si<BR>
+	<INPUT TYPE="Radio" NAME="voto" VALUE="si" CHECKED>Si<BR>
 	<INPUT TYPE="RADIO" NAME="voto" VALUE="no">No<BR><BR>
 	<INPUT TYPE="submit" NAME="enviar" VALUE="votar"><BR>
 	</form>
+	
+	<A HREF="LAB72.PHP">Ver Resultados</A>
 	
 	<A HREF="LAB72.PHP">Ver Resultados</A>
 	
