@@ -4,6 +4,8 @@
 	<Link REL="stylesheet" TYPE="TEXT/css" href="bootstrap/css/bootstrap.min.css">
 </HEAD>
 <body>
+<?php include "navbar.php"; ?>
+
 <?PHP
 if(array_key_exists('enviar',$_POST)){
 	
@@ -65,7 +67,7 @@ if ($_REQUEST['nombre'] != "" && $_REQUEST['sexo'] != ""  && $_REQUEST['edad'] !
 			</select>	
 				
 			<br>
-			<INPUT TYPE="submit" class="btn btn-block btn-success" NAME="enviar" VALUE="Registrar"><BR>
+			<INPUT TYPE="submit" class="btn btn-primary" NAME="enviar" VALUE="Registrar"><BR>
 
 					</div>
 	</div>

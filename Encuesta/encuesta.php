@@ -4,6 +4,8 @@
 	<Link REL="stylesheet" TYPE="TEXT/css" href="bootstrap/css/bootstrap.min.css">
 </HEAD>
 <body>
+<?php include "navbar.php"; ?>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
@@ -12,6 +14,9 @@
 		</div>
 	</div>		
 </div>
+
+
+
 <?PHP
 $conexion = mysqli_connect ("localhost","root","")
 	or die ("No se puede conectar la base de datos");
@@ -28,7 +33,7 @@ $nfilas = mysqli_num_rows($consulta);
 if($nfilas > 0)
 {
 	
-	for ($i=1; $i<11; $i++)
+	for ($i=1; $i<$nfilas; $i++)
 	{
 		$resultado = mysqli_fetch_array($consulta);
 		
@@ -59,6 +64,8 @@ if($nfilas > 0)
 		}
 		
 		print("<BR><INPUT TYPE=submit class=btn btn-info NAME=enviar VALUE=Votar><BR>");
+		
+		
 		
 		print("</form>");
 	}

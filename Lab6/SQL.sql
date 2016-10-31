@@ -65,3 +65,11 @@ PREPARE stmt FROM @s;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 END;
+
+
+
+
+CREATE DEFINER = `root`@`localhost` PROCEDURE `sp_listar_votos`()
+BEGIN 
+SELECT votos1, votos2, votos3, votos4, votos5, votos6 FROM votos;
+END;
