@@ -18,10 +18,10 @@ if ($_REQUEST['nombre'] != "" && $_REQUEST['sexo'] != ""  && $_REQUEST['edad'] !
 		
 		$link = mysqli_connect("localhost", "root", "");
 		mysqli_select_db($link, "encuesta");
-		mysqli_query($link, "INSERT INTO `usuario` (`id`, `Nombre`, `Sexo`, `Edad`, `Salario`, `Provincia`) VALUES (NULL, '$nombre', '$sexo', 'Sedad', 'Ssalario', '$provincia');");
+		mysqli_query($link, "INSERT INTO `usuario` (`id`, `Nombre`, `Sexo`, `Edad`, `Salario`, `Provincia`) VALUES (NULL, '$nombre', '$sexo', '$edad', '$salario', '$provincia');");
 		mysqli_close($link); 
 			
-		print "<script>alert(\"Registro exitoso. Proceda a contestar la encuesta\");window.location='../encuesta.php';</script>";
+		print "<script>alert(\"Registro exitoso. Proceda a contestar la encuesta\");window.location='../encuesta';</script>";
 		}
 		else{
 		print "<script>alert(\"Debe ingresar todos los datos para iniciar la encuesta\");window.location='../encuesta/index.php';</script>";
@@ -35,7 +35,7 @@ if ($_REQUEST['nombre'] != "" && $_REQUEST['sexo'] != ""  && $_REQUEST['edad'] !
 	<div class="row">
 		<div class="col-md-6">
 			<H1>Registro Inicial</H1>
-			<P>Ingrese los siguientes datos para iniciar la encuesta</p>
+			<h3>Ingrese los siguientes datos para iniciar la encuesta</h3>
 		
 			<label for="nombre">Nombre</label>
 			<INPUT type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
@@ -46,9 +46,9 @@ if ($_REQUEST['nombre'] != "" && $_REQUEST['sexo'] != ""  && $_REQUEST['edad'] !
 				<option value="F">F</option>
 			</select><br>
 			<label for="edad">Edad</label>
-			<INPUT type="text" class="form-control" id="edad" name="edad" placeholder="Edad">
+			<INPUT type="number" class="form-control" id="edad" name="edad" placeholder="00">
 			<label for="salario">Salario</label>
-			<INPUT type="text" class="form-control" id="salario" name="salario" placeholder="salario">
+			<INPUT type="number" class="form-control" id="salario" name="salario" placeholder="0000">
 			<label for="Provincia">Provincia</label>
 				<select name="provincia" class="form-control" id="salario" name="salario">
 				<option value="" select></option> 
@@ -65,7 +65,7 @@ if ($_REQUEST['nombre'] != "" && $_REQUEST['sexo'] != ""  && $_REQUEST['edad'] !
 			</select>	
 				
 			<br>
-			<INPUT TYPE="submit" NAME="enviar" VALUE="Registrar"><BR>
+			<INPUT TYPE="submit" class="btn btn-default" NAME="enviar" VALUE="Registrar"><BR>
 	
 					</div>
 	</div>
