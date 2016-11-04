@@ -8,18 +8,19 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="./"><b></b></a>
+    <a class="navbar-brand" href="./"><b>LOCKER SYSTEM</b></a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-     
-      <li><a href="./index.php"><b>Registro</b></a></li>
-      <li><a href="./encuesta.php"><b>Encuesta</b></a></li>
-
-      <li><a href="./mantenimiento.php"><b>Mantenimiento</b></a></li>
-      <li><a href="./enconstruccion.php"><b>Reportes</b></a></li>
+      <?php if(!isset($_SESSION["user_id"])):?>
+      <li><a href="./registro.php">REGISTRO</a></li>
+      <li><a href="./login.php">LOGIN</a></li>
+	  
+    <?php else:?>
+      <li><a href="./php/logout.php">SALIR</a></li>
+    <?php endif;?>
     </ul>
 
   </div><!-- /.navbar-collapse -->

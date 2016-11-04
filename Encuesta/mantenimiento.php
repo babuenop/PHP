@@ -50,7 +50,7 @@
 							<td> <?php echo $row['opcion6'];?> </td>
 							
 							<td>
-								<a href="modificar.php?id=<?php echo $row['id'];?>">Modificar</a>
+								<a href="actualizar.php?id=<?php echo $row['id'];?>">Modificar</a>
 							</td>
 
 							<td>

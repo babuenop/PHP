@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Crear Pregunta</title>
-		<Link REL="stylesheet" TYPE="TEXT/css" href="bootstrap/css/bootstrap.css">
+		<Link REL="stylesheet" TYPE="TEXT/css" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
 	<?php include "navbar.php"; ?>

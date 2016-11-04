@@ -22,7 +22,7 @@
 					mysqli_query($link, "INSERT INTO `PREGUNTAS` (`ID`, `PREGUNTA`, `TIPO`, `OPCION1`, `OPCION2`, `OPCION3`, `OPCION4`, `OPCION5`, `OPCION6`) VALUES (NULL, '$pregunta', '$tipo', '$opcion1', '$opcion2', '$opcion3', '$opcion4', '$opcion5', '$opcion6');");
 					mysqli_close($link); 
 						
-					print "<script>alert(\"Su pregunta se ha guardado exitosamente.\");window.location='../mantenimiento/index.php';</script>";
+					print "<script>alert(\"Su pregunta se ha guardado exitosamente.\");window.location='../encuesta/mantenimiento.php';</script>";
 				}
 					else{
 					print "<script>alert(\"Debe completar todos los datoSs\")";

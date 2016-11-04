@@ -33,7 +33,7 @@ $nfilas = mysqli_num_rows($consulta);
 if($nfilas > 0)
 {
 	
-	for ($i=1; $i<$nfilas; $i++)
+	for ($i=1; $i<=$nfilas; $i++)
 	{
 		$resultado = mysqli_fetch_array($consulta);
 		
@@ -73,7 +73,7 @@ if($nfilas > 0)
 }
 else
 {
-	print("No hay noticias disponibles");
+	print("<h3>No hay preguntas disponibles<h3>");
 }
 mysqli_close($conexion)
 
