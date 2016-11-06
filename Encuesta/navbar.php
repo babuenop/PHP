@@ -19,7 +19,7 @@
       <li><a href="./encuesta.php"><b>Encuesta</b></a></li>
 
       <li><a href="./mantenimiento.php"><b>Mantenimiento</b></a></li>
-      <li><a href="./enconstruccion.php"><b>Reportes</b></a></li>
+      <li><a href="./resultados.php"><b>Resultados</b></a></li>
     </ul>
 
   </div><!-- /.navbar-collapse -->
