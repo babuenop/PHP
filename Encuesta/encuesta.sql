@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2016 a las 09:24:20
+-- Tiempo de generación: 06-11-2016 a las 12:03:56
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 7.0.8
 
@@ -27,6 +27,14 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listar_preguntas` ()  BEGIN 
 SELECT ID, PREGUNTA, TIPO, OPCION1, OPCION2, OPCION3, OPCION4, OPCION5, OPCION6 FROM PREGUNTAS; 
 END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listar_resultados` ()  NO SQL
+SELECT DISTINCTROW resultados.idpregunta, Sum(resultados.votos1) AS votos1, Sum(resultados.votos2) AS votos2, Sum(resultados.votos3) AS votos3, Sum(resultados.votos4) AS votos4, Sum(resultados.votos5) AS votos5, Sum(resultados.votos6) AS votos6
+FROM resultados 
+GROUP BY resultados.idpregunta$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrarVoto` (IN `idencuesta` INT, IN `idpregunta` INT, IN `votos1` INT, IN `votos2` INT, IN `votos3` INT, IN `votos4` INT, IN `votos5` INT, IN `votos6` INT)  NO SQL
+INSERT INTO resultados (`idpregunta`, `idencuesta`, `votos1`, `votos2`, `votos3`, `votos4`, `votos5`, `votos6`) VALUES (idpregunta, idencuesta, votos1, votos2, votos3, votos4, votos5, votos6)$$
 
 DELIMITER ;
 
@@ -53,15 +61,16 @@ CREATE TABLE `preguntas` (
 --
 
 INSERT INTO `preguntas` (`ID`, `PREGUNTA`, `TIPO`, `OPCION1`, `OPCION2`, `OPCION3`, `OPCION4`, `OPCION5`, `OPCION6`) VALUES
-(1, 'De los siguientes productos cual es el que mas consume \r\n', 'checkbox', 'Leche', 'Huevos', 'Arroz', 'Pasta', NULL, NULL),
-(2, 'Cuantas veces en el mes visita el supermercado \r\n', 'radio', '1 vez\r\n', '2 veces\r\n', '3 veces\r\n', NULL, NULL, NULL),
-(3, 'Cuantas personas componen su grupo familiar \r\n', 'radio', '1 Persona', '2 Persona', '2 Persona', '3 Persona', '4 Persona', NULL),
-(14, 'Pregunta 15 ', 'radio', 'x', 'y', 'z', NULL, NULL, NULL),
-(15, 'Pregunta 16 ', 'checkbox', 'x', 'y', 'z', 's', NULL, NULL),
-(16, 'Pregunta 17 ', 'radio', 'x', 'y', 'z', NULL, NULL, NULL),
-(17, 'Pregunta 18 ', 'checkbox', 'x', 'y', 'z', 's', NULL, NULL),
-(18, 'test1', 'checkbox', '1', '1', '', '', '', ''),
-(19, 'test1', 'checkbox', '1', '1', '', '', '', '');
+(1, 'Â¿Usted hace supermercado dos veces por mes?', 'radio', 'Si', 'No', '', '', '', ''),
+(2, 'Â¿En que Supermercado es el que mas frecuenta?', 'radio', 'Super 99', 'Supermercados el rey', 'Ribasmith', 'Pricesmart', 'Super Xtra', 'Otro'),
+(3, 'Â¿En cual rango se encuentra su presupuesto para hacer Supermercado?', 'radio', '50-100 ', '101-150', '151-250', '251-400', 'MÃ¡s de 400', ''),
+(4, 'Â¿Seleccione de estos 1 producto que no pueda faltar en su compra? ', 'radio', 'Leche', 'Huevo', 'Pan', 'Detergente', '', ''),
+(5, 'Â¿En que Areas considera usted que los precios son mas altos?', 'checkbox', 'Comida', 'Higiene Personal', 'ArtÃ­culos de Limpieza', '', '', ''),
+(6, 'Â¿Cual supermercado considera que tiene los precios mas bajos?', 'checkbox', 'Super 99', 'Supermercados Rey', 'Ribasmith ', 'Pricesmart ', 'Super Xtra', 'Super 99'),
+(7, 'Â¿Cual Sueprmercado considera que tiene mayor calidad en sus productos?', 'checkbox', 'Super 99', 'Supermercados Rey', 'Ribasmith ', 'Pricesmart ', 'Super Xtra', 'Super 99'),
+(8, 'Â¿Cual de los siguiente supermercado es el mas cercano a su residencia?', 'radio', 'Super 99', 'Supermercados Rey', 'Ribasmith ', 'Pricesmart ', 'Super Xtra', ''),
+(9, 'Â¿En que momento del dÃ­a le gusta hacer Supermercado?', 'radio', 'DÃ­a', 'Tarde', 'Noche', 'Madrugada', '', ''),
+(10, 'Â¿Ha comprado electrodomÃ©sticos en alguno de estos supermercados ?', 'radio', 'Si', 'No', '', '', '', 'Si');
 
 -- --------------------------------------------------------
 
@@ -70,6 +79,7 @@ INSERT INTO `preguntas` (`ID`, `PREGUNTA`, `TIPO`, `OPCION1`, `OPCION2`, `OPCION
 --
 
 CREATE TABLE `resultados` (
+  `idencuesta` int(11) NOT NULL,
   `idpregunta` int(11) NOT NULL,
   `votos1` int(11) NOT NULL,
   `votos2` int(11) NOT NULL,
@@ -78,6 +88,32 @@ CREATE TABLE `resultados` (
   `votos5` int(11) NOT NULL,
   `votos6` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `resultados`
+--
+
+INSERT INTO `resultados` (`idencuesta`, `idpregunta`, `votos1`, `votos2`, `votos3`, `votos4`, `votos5`, `votos6`) VALUES
+(52, 1, 0, 0, 0, 0, 0, 0),
+(52, 2, 0, 0, 0, 0, 0, 0),
+(52, 3, 0, 0, 0, 0, 0, 0),
+(52, 5, 0, 0, 0, 0, 0, 0),
+(52, 6, 0, 0, 3, 0, 0, 0),
+(52, 9, 0, 1, 0, 0, 0, 0),
+(53, 1, 0, 1, 0, 0, 0, 0),
+(53, 3, 1, 0, 0, 0, 0, 0),
+(53, 4, 0, 1, 0, 0, 0, 0),
+(53, 5, 0, 1, 1, 0, 0, 0),
+(54, 1, 0, 1, 0, 0, 0, 0),
+(54, 2, 0, 0, 0, 0, 1, 0),
+(54, 3, 0, 0, 0, 1, 0, 0),
+(54, 4, 0, 1, 0, 0, 0, 0),
+(54, 5, 0, 0, 1, 0, 0, 0),
+(54, 6, 0, 0, 0, 0, 1, 0),
+(54, 7, 0, 0, 1, 0, 0, 0),
+(54, 8, 1, 0, 0, 0, 0, 0),
+(54, 9, 0, 1, 0, 0, 0, 0),
+(54, 10, 0, 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -99,11 +135,38 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `Nombre`, `Sexo`, `Edad`, `Salario`, `Provincia`) VALUES
-(19, 'Pedro', 'M', 32, 2500, 'Colon'),
 (20, 'MANUEL', 'M', 33, 1000, 'Veraguas'),
 (21, 'JUAN', 'M', 35, 2000, 'Los Santos'),
 (22, 'DANIEL', 'M', 50, 1500, 'Cocle'),
-(23, 'JUAN', 'M', 32, 1234, 'Chiriqui');
+(23, 'JUAN', 'M', 32, 1234, 'Chiriqui'),
+(24, 'erty', 'M', 45, 1234, 'Darien'),
+(25, 'twertw', 'M', 34, 5423, 'Chiriqui'),
+(26, 'PEDRO P', 'M', 32, 324, 'Herrera'),
+(27, 'JINNETH', 'F', 32, 1200, 'Panama'),
+(28, 'MANUEL', 'M', 38, 2000, 'Panama'),
+(29, 'DELMAR', 'M', 32, 342, 'Cocle'),
+(30, 'JUAN', 'M', 21, 120, 'Chiriqui'),
+(31, 'ANAHIS', 'F', 21, 800, 'Panama'),
+(32, 'LUIS', 'M', 21, 2000, 'Panama'),
+(33, 'CARMEN', 'F', 43, 700, 'Darien'),
+(34, 'ALEXIS', 'M', 33, 399, 'Cocle'),
+(35, 'ANGEL', 'M', 33, 499, 'Los Santos'),
+(39, 'ANGEL', 'M', 33, 499, 'Los Santos'),
+(40, 'JOSE ', 'M', 45, 899, 'Panama'),
+(41, 'LORENA', 'F', 54, 3456, 'Darien'),
+(42, 'JUAN PEREZ', 'M', 32, 1200, 'Panama Oesta'),
+(43, 'ARGELIS', 'F', 34, 3000, 'Bocas del Toro'),
+(44, 'YOLANDA', 'F', 55, 2345, 'Veraguas'),
+(45, 'MIGUEL ANGEL', 'M', 45, 234, 'Los Santos'),
+(46, 'ESTEBAN', 'M', 34, 3000, 'Colon'),
+(47, 'MARIA', 'F', 34, 2000, 'Veraguas'),
+(48, 'JOSE MIGUEL', 'M', 54, 4567, 'Herrera'),
+(49, 'JUAN MIGUEL', 'M', 14, 100, 'Bocas del Toro'),
+(50, 'JINNETH', 'F', 32, 1200, 'Panama'),
+(51, 'SANDRA', 'F', 40, 345, 'Panama'),
+(52, 'KAREN', 'F', 24, 1000, 'Cocle'),
+(53, 'JINNETH', 'F', 45, 1233, 'Herrera'),
+(54, 'JUAN PEREZ', 'M', 43, 1200, 'Chiriqui');
 
 --
 -- Índices para tablas volcadas
@@ -113,13 +176,21 @@ INSERT INTO `usuario` (`id`, `Nombre`, `Sexo`, `Edad`, `Salario`, `Provincia`) V
 -- Indices de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ID` (`ID`);
+
+--
+-- Indices de la tabla `resultados`
+--
+ALTER TABLE `resultados`
+  ADD PRIMARY KEY (`idencuesta`,`idpregunta`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -129,12 +200,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `ID` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
