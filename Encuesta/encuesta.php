@@ -4,30 +4,27 @@
 	<Link REL="stylesheet" TYPE="TEXT/css" href="bootstrap/css/bootstrap.min.css">
 </HEAD>
 <body>
-<?php include "navbar.php"; ?>
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-6">
-			<H1>Encuesta</H1>
-			<h3>Responda todas las preguntas</h3>
-		</div>
-	</div>		
-</div>
 
 
 
-<?PHP
-$conexion = mysqli_connect ("localhost","root","")
-	or die ("No se puede conectar la base de datos");
+<?php 
+include "navbar.php"; 
 
-mysqli_select_db ($conexion, "encuesta")
-	or die("No se puede seleccionar la base de datos");
+print ("<div class=container>");
+	print("<div class=row>");
+		print("<div class=col-md-6>");
+			print("<H1>Encuesta</H1>");
+			print ("<h3>Responda todas las preguntas</h3>");
+		print("</div>");
+	print("</div>");
+print("</div>");
+?>
 
-$instruccion = "CALL sp_listar_preguntas();";
+<?php
+require('conexion.php');
+$instruccion = "CALL sp_listar_preguntas ();";
 $consulta = mysqli_query ($conexion, $instruccion)
-	or die("Fallo en la consulta". mysqli_error($conexion));
-
+	or die("Fallo en la consulta ". mysqli_error($conexion));
 $nfilas = mysqli_num_rows($consulta);
 
 if($nfilas > 0)
@@ -37,30 +34,33 @@ if($nfilas > 0)
 	{
 		$resultado = mysqli_fetch_array($consulta);
 		
-		print("<FORM action=votar.php method=POST>");
+		print("<FORM action=registrarVoto.php method=POST>");
 		print("<div class=container>");
 		print("<div class=row>
+
 			
 		<br>");
+		print ("<input type=hidden name=idpregunta value=".$i." /><br>");
+		print ("<input type=hidden name=idresult value=".$resultado ['TIPO']." /><br>");
 		
-		print ("<H3> " .$i ." - " .$resultado ['PREGUNTA'] . "</H3>");		
+		print ("<H3> " .$i ." - " .$resultado ['PREGUNTA'] . "</H3><br>");		
 		if ($resultado['OPCION1'] != "") {
-		print ("<input name=" .$resultado ['TIPO'] . " id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION1'] . "<br>");
+		print ("<input name=" .$resultado ['TIPO'] . "1 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION1'] . "<br>");
 		}
 		if ($resultado['OPCION2'] != "") {
-		print ("<input name=" .$resultado ['TIPO'] . " id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION2'] . "<br>");
+		print ("<input name=" .$resultado ['TIPO'] . "2 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION2'] . "<br>");
 		}
 		if ($resultado['OPCION3'] != "") {
-		print ("<input name=" .$resultado ['TIPO'] . " id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION3'] . "<br>");
+		print ("<input name=" .$resultado ['TIPO'] . "3 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION3'] . "<br>");
 		}
 		if ($resultado['OPCION4'] != "") {
-		print ("<input name=" .$resultado ['TIPO'] . " id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION4'] . "<br>");
+		print ("<input name=" .$resultado ['TIPO'] . "4 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION4'] . "<br>");
 		}
 		if ($resultado['OPCION5'] != "") {
-		print ("<input name=" .$resultado ['TIPO'] . " id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION5'] . "<br>");
+		print ("<input name=" .$resultado ['TIPO'] . "5 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION5'] . "<br>");
 		}
 		if ($resultado['OPCION6'] != "") {
-		print ("<input name=" .$resultado ['TIPO'] . " id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION6'] . "<br>");
+		print ("<input name=" .$resultado ['TIPO'] . "6 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION6'] . "<br>");
 		}
 		
 		print("<BR><INPUT TYPE=submit class=btn btn-info NAME=enviar VALUE=Votar><BR>");
@@ -75,6 +75,7 @@ else
 {
 	print("<h3>No hay preguntas disponibles<h3>");
 }
+
 mysqli_close($conexion)
 
 ?>

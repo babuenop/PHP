@@ -21,9 +21,11 @@ if ($_REQUEST['nombre'] != "" && $_REQUEST['sexo'] != ""  && $_REQUEST['edad'] !
 		$link = mysqli_connect("localhost", "root", "");
 		mysqli_select_db($link, "encuesta");
 		mysqli_query($link, "INSERT INTO `usuario` (`id`, `Nombre`, `Sexo`, `Edad`, `Salario`, `Provincia`) VALUES (NULL, '$nombre', '$sexo', '$edad', '$salario', '$provincia');");
-		mysqli_close($link); 
 			
+		mysqli_close($link); 
+		
 		print "<script>alert(\"Registro exitoso. Proceda a contestar la encuesta\");window.location='../encuesta/encuesta.php';</script>";
+		
 		}
 		else{
 		print "<script>alert(\"Debe ingresar todos los datos para iniciar la encuesta\");window.location='../encuesta/index.php';</script>";

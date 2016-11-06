@@ -46,7 +46,7 @@ if(array_key_exists('enviar',$_POST))
 	mysqli_close($conexion);
 	
 	print ("<p>Su voto ha sido registrado. Gracias por participar</p>\n");
-	print ("<A HREF='Encuesta.php'>Ver resultados</A>\n");
+	print ("<A HREF='lab72.php'>Ver resultados</A>\n");
 	}
 	else
 	{

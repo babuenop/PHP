@@ -4,5 +4,4 @@
 
 	mysqli_select_db ($conexion, "encuesta")
 	or die("No se puede seleccionar la base de datos");
-
  ?>
