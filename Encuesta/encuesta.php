@@ -15,7 +15,10 @@ print ("<div class=container>");
 		print("<div class=col-md-6>");
 			print("<H1>Encuesta</H1>");
 			print ("<h3>Responda todas las preguntas</h3>");
-		print("</div>");
+			$totalpreguntas=0;
+			print ("<TD CLASS='izquierda' WIDTH='400'><IMG SRC='img/puntoamarillo.gif' HEIGHT='10' WIDTH='".$totalpreguntas*15 . "'></TD>\n");	
+		
+			print("</div>");
 	print("</div>");
 print("</div>");
 ?>
@@ -27,6 +30,7 @@ $consulta = mysqli_query ($conexion, $instruccion)
 	or die("Fallo en la consulta ". mysqli_error($conexion));
 $nfilas = mysqli_num_rows($consulta);
 
+
 if($nfilas > 0)
 {
 	
@@ -37,15 +41,18 @@ if($nfilas > 0)
 		print("<FORM action=registrarVoto.php method=POST>");
 		print("<div class=container>");
 		print("<div class=row>
-
 			
 		<br>");
-		print ("<input type=hidden name=idpregunta value=".$i." /><br>");
-		print ("<input type=hidden name=idresult value=".$resultado ['TIPO']." /><br>");
+		print ("<input type=hidden name=idpregunta value=".$resultado ['ID'] ." /><br>");
+		print ("<input type=hidden name=TIPO value=".$resultado ['TIPO']." /><br>");
 		
-		print ("<H3> " .$i ." - " .$resultado ['PREGUNTA'] . "</H3><br>");		
+		
+		print ("<H3> " .$resultado ['ID'] ." - " .$resultado ['PREGUNTA'] . "</H3><br>");		
 		if ($resultado['OPCION1'] != "") {
 		print ("<input name=" .$resultado ['TIPO'] . "1 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION1'] . "<br>");
+		}
+		else{
+			
 		}
 		if ($resultado['OPCION2'] != "") {
 		print ("<input name=" .$resultado ['TIPO'] . "2 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION2'] . "<br>");
@@ -63,8 +70,7 @@ if($nfilas > 0)
 		print ("<input name=" .$resultado ['TIPO'] . "6 id=" .$resultado ['TIPO'] . " value=1 type=" .$resultado ['TIPO'] . "> " .$resultado ['OPCION6'] . "<br>");
 		}
 		
-		print("<BR><INPUT TYPE=submit class=btn btn-info NAME=enviar VALUE=Votar><BR>");
-		
+		print("<BR><INPUT TYPE=submit class=btn btn-primary NAME=enviar VALUE=Votar><BR>");
 		
 		
 		print("</form>");

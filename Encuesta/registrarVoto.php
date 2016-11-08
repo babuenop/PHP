@@ -9,12 +9,11 @@
 ?>
 <?php 
 	require('conexion.php');
-	error_reporting(E_ALL ^ E_NOTICE);
-	
+	error_reporting(E_ALL ^ E_NOTICE);	
 
 	$instruccion="CALL sp_registrarVoto()";
 	$idpregunta=$_POST['idpregunta'];
-	$test=$_POST['idresult'];
+	$tipo=$_POST['TIPO'];
 		
 /* 		$votos1=1;
 	$votos2="";
@@ -23,12 +22,12 @@
 	$votos5="";
 	$votos6=""; */
 	
-	$votos1=$_POST[$test."1"];
-	$votos2=$_POST[$test."2"];
-	$votos3=$_POST[$test."3"];
-	$votos4=$_POST[$test."4"];
-	$votos5=$_POST[$test."5"];
-	$votos6=$_POST[$test."6"];
+	$votos1=$_POST[$tipo."1"];
+	$votos2=$_POST[$tipo."2"];
+	$votos3=$_POST[$tipo."3"];
+	$votos4=$_POST[$tipo."4"];
+	$votos5=$_POST[$tipo."5"];
+	$votos6=$_POST[$tipo."6"];
 	
 	print ("<p>idencuesta=".$idencuesta."</p>");
 	print ("<p>idpregunta=".$idpregunta."</p>");
@@ -38,6 +37,8 @@
 	print ("<p>votos4=".$votos4."</p>");
 	print ("<p>votos5=".$votos5."</p>");
 	print ("<p>votos6=".$votos6."</p>");  
+	
+	$totalpreguntas=$totalpreguntas+1;
 	
 	$insertar = mysqli_query($conexion,"call sp_registrarVoto('$idencuesta','$idpregunta','$votos1','$votos2','$votos3','$votos4','$votos5','$votos6')");
 			if (!$insertar){
