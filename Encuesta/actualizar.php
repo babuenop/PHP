@@ -26,7 +26,7 @@
 				<div class="col-md-6">
 
 					<form role="form" name="registro" action="saveactualizar0.php" method="post">
-					<h1>Actualizar pregunta Pregunta</h1>
+					<h1>Actualizar Pregunta</h1>
 					<br>											
 					    <input type="hidden" class="form-control" id="ID" name="ID" value="<?php echo $id; ?>">	
 

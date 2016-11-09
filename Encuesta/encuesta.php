@@ -5,10 +5,21 @@
 </HEAD>
 <body>
 
+<?php
+	require('conexion.php');
+	$instruccion = "CALL sp_obtener_id ();";
+	$consulta = mysqli_query ($conexion, $instruccion)
+	or die("Fallo en la consulta". mysqli_error($conexion));
+	$id = mysqli_fetch_array($consulta);
+	$idencuesta=$id ['id'];
+	mysqli_close($conexion);
+?>
+
 
 
 <?php 
 include "navbar.php"; 
+
 
 print ("<div class=container>");
 	print("<div class=row>");

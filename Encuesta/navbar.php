@@ -15,9 +15,7 @@
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
      
-      <li><a href="./index.php"><b>Registro</b></a></li>
-      <li><a href="./encuesta.php"><b>Encuesta</b></a></li>
-
+      <li><a href="./index.php"><b>Encuesta</b></a></li>
       <li><a href="./mantenimiento.php"><b>Mantenimiento</b></a></li>
       <li><a href="./resultados.php"><b>Resultados</b></a></li>
     </ul>

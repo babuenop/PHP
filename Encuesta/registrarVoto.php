@@ -38,7 +38,6 @@
 	print ("<p>votos5=".$votos5."</p>");
 	print ("<p>votos6=".$votos6."</p>");  
 	
-	$totalpreguntas=$totalpreguntas+1;
 	
 	$insertar = mysqli_query($conexion,"call sp_registrarVoto('$idencuesta','$idpregunta','$votos1','$votos2','$votos3','$votos4','$votos5','$votos6')");
 			if (!$insertar){

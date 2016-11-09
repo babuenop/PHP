@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2016 a las 12:03:56
+-- Tiempo de generación: 09-11-2016 a las 01:17:26
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 7.0.8
 
@@ -25,16 +25,24 @@ DELIMITER $$
 -- Procedimientos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listar_preguntas` ()  BEGIN 
-SELECT ID, PREGUNTA, TIPO, OPCION1, OPCION2, OPCION3, OPCION4, OPCION5, OPCION6 FROM PREGUNTAS; 
+SELECT ID, PREGUNTA, TIPO, OPCION1, OPCION2, OPCION3, OPCION4, OPCION5, OPCION6 FROM PREGUNTAS
+ORDER BY RAND() LIMIT 5; 
+
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listar_resultados` ()  NO SQL
-SELECT DISTINCTROW resultados.idpregunta, Sum(resultados.votos1) AS votos1, Sum(resultados.votos2) AS votos2, Sum(resultados.votos3) AS votos3, Sum(resultados.votos4) AS votos4, Sum(resultados.votos5) AS votos5, Sum(resultados.votos6) AS votos6
-FROM resultados 
-GROUP BY resultados.idpregunta$$
+SELECT DISTINCTROW preguntas.*, Sum(resultados.votos1) AS votos1, Sum(resultados.votos2) AS votos2, Sum(resultados.votos3) AS votos3, Sum(resultados.votos4) AS votos4, Sum(resultados.votos5) AS votos5, Sum(resultados.votos6) AS votos6 FROM `resultados` , `preguntas`,usuario WHERE usuario.id=resultados.idencuesta and resultados.idpregunta = preguntas.ID GROUP BY preguntas.pregunta ORDER BY `resultados`.`idpregunta` ASC$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_obtener_id` ()  NO SQL
+SELECT * FROM `usuario` ORDER BY `id` DESC LIMIT 1$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_progreso` (IN `idencuesta` INT, OUT `progreso` INT)  NO SQL
+SELECT resultados.idencuesta, count(`resultados`.`idencuesta`)
+FROM `resultados`
+WHERE resultados.idencuesta=idencuesta$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrarVoto` (IN `idencuesta` INT, IN `idpregunta` INT, IN `votos1` INT, IN `votos2` INT, IN `votos3` INT, IN `votos4` INT, IN `votos5` INT, IN `votos6` INT)  NO SQL
-INSERT INTO resultados (`idpregunta`, `idencuesta`, `votos1`, `votos2`, `votos3`, `votos4`, `votos5`, `votos6`) VALUES (idpregunta, idencuesta, votos1, votos2, votos3, votos4, votos5, votos6)$$
+INSERT INTO resultados (`idpregunta`, `idencuesta`, `votos1`, `votos2`, `votos3`, `votos4`, `votos5`, `votos6` ) VALUES (idpregunta, idencuesta, votos1, votos2, votos3, votos4, votos5, votos6)$$
 
 DELIMITER ;
 
@@ -62,7 +70,7 @@ CREATE TABLE `preguntas` (
 
 INSERT INTO `preguntas` (`ID`, `PREGUNTA`, `TIPO`, `OPCION1`, `OPCION2`, `OPCION3`, `OPCION4`, `OPCION5`, `OPCION6`) VALUES
 (1, 'Â¿Usted hace supermercado dos veces por mes?', 'radio', 'Si', 'No', '', '', '', ''),
-(2, 'Â¿En que Supermercado es el que mas frecuenta?', 'radio', 'Super 99', 'Supermercados el rey', 'Ribasmith', 'Pricesmart', 'Super Xtra', 'Otro'),
+(2, 'Â¿Cual es el Supermercado que usted mas frecuenta?', 'radio', 'Super 99', 'Supermercados el rey', 'Ribasmith', 'Pricesmart', 'Super Xtra', 'Otro'),
 (3, 'Â¿En cual rango se encuentra su presupuesto para hacer Supermercado?', 'radio', '50-100 ', '101-150', '151-250', '251-400', 'MÃ¡s de 400', ''),
 (4, 'Â¿Seleccione de estos 1 producto que no pueda faltar en su compra? ', 'radio', 'Leche', 'Huevo', 'Pan', 'Detergente', '', ''),
 (5, 'Â¿En que Areas considera usted que los precios son mas altos?', 'checkbox', 'Comida', 'Higiene Personal', 'ArtÃ­culos de Limpieza', '', '', ''),
@@ -70,7 +78,7 @@ INSERT INTO `preguntas` (`ID`, `PREGUNTA`, `TIPO`, `OPCION1`, `OPCION2`, `OPCION
 (7, 'Â¿Cual Sueprmercado considera que tiene mayor calidad en sus productos?', 'checkbox', 'Super 99', 'Supermercados Rey', 'Ribasmith ', 'Pricesmart ', 'Super Xtra', 'Super 99'),
 (8, 'Â¿Cual de los siguiente supermercado es el mas cercano a su residencia?', 'radio', 'Super 99', 'Supermercados Rey', 'Ribasmith ', 'Pricesmart ', 'Super Xtra', ''),
 (9, 'Â¿En que momento del dÃ­a le gusta hacer Supermercado?', 'radio', 'DÃ­a', 'Tarde', 'Noche', 'Madrugada', '', ''),
-(10, 'Â¿Ha comprado electrodomÃ©sticos en alguno de estos supermercados ?', 'radio', 'Si', 'No', '', '', '', 'Si');
+(10, 'Â¿Ha comprado electrodomÃ©sticos en alguno de estos supermercados ?', 'radio', 'Si', 'No', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -86,34 +94,49 @@ CREATE TABLE `resultados` (
   `votos3` int(11) NOT NULL,
   `votos4` int(11) NOT NULL,
   `votos5` int(11) NOT NULL,
-  `votos6` int(11) NOT NULL
+  `votos6` int(11) NOT NULL,
+  `sexo` varchar(35) NOT NULL,
+  `edad` varchar(35) NOT NULL,
+  `provincia` varchar(35) NOT NULL,
+  `salario` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `resultados`
 --
 
-INSERT INTO `resultados` (`idencuesta`, `idpregunta`, `votos1`, `votos2`, `votos3`, `votos4`, `votos5`, `votos6`) VALUES
-(52, 1, 0, 0, 0, 0, 0, 0),
-(52, 2, 0, 0, 0, 0, 0, 0),
-(52, 3, 0, 0, 0, 0, 0, 0),
-(52, 5, 0, 0, 0, 0, 0, 0),
-(52, 6, 0, 0, 3, 0, 0, 0),
-(52, 9, 0, 1, 0, 0, 0, 0),
-(53, 1, 0, 1, 0, 0, 0, 0),
-(53, 3, 1, 0, 0, 0, 0, 0),
-(53, 4, 0, 1, 0, 0, 0, 0),
-(53, 5, 0, 1, 1, 0, 0, 0),
-(54, 1, 0, 1, 0, 0, 0, 0),
-(54, 2, 0, 0, 0, 0, 1, 0),
-(54, 3, 0, 0, 0, 1, 0, 0),
-(54, 4, 0, 1, 0, 0, 0, 0),
-(54, 5, 0, 0, 1, 0, 0, 0),
-(54, 6, 0, 0, 0, 0, 1, 0),
-(54, 7, 0, 0, 1, 0, 0, 0),
-(54, 8, 1, 0, 0, 0, 0, 0),
-(54, 9, 0, 1, 0, 0, 0, 0),
-(54, 10, 0, 1, 0, 0, 0, 0);
+INSERT INTO `resultados` (`idencuesta`, `idpregunta`, `votos1`, `votos2`, `votos3`, `votos4`, `votos5`, `votos6`, `sexo`, `edad`, `provincia`, `salario`) VALUES
+(2, 3, 0, 1, 0, 0, 0, 0, '', '', '', ''),
+(20, 1, 0, 1, 0, 0, 0, 0, '', '', '', ''),
+(20, 2, 1, 0, 0, 0, 0, 0, '', '', '', ''),
+(20, 3, 0, 1, 0, 0, 0, 0, '', '', '', ''),
+(20, 4, 0, 0, 0, 1, 0, 0, '', '', '', ''),
+(20, 5, 1, 0, 1, 0, 0, 0, '', '', '', ''),
+(20, 6, 0, 0, 1, 0, 0, 0, '', '', '', ''),
+(20, 7, 0, 0, 1, 0, 0, 0, '', '', '', ''),
+(20, 8, 0, 0, 0, 1, 0, 0, '', '', '', ''),
+(20, 9, 0, 0, 0, 1, 0, 0, '', '', '', ''),
+(20, 10, 0, 1, 0, 0, 0, 0, '', '', '', ''),
+(21, 1, 1, 0, 0, 0, 0, 0, '', '', '', ''),
+(21, 2, 0, 0, 0, 0, 0, 1, '', '', '', ''),
+(21, 3, 0, 0, 0, 1, 0, 0, '', '', '', ''),
+(21, 4, 0, 1, 0, 0, 0, 0, '', '', '', ''),
+(21, 5, 1, 0, 0, 0, 0, 0, '', '', '', ''),
+(21, 6, 1, 0, 0, 0, 0, 0, '', '', '', ''),
+(21, 7, 0, 0, 0, 0, 0, 0, '', '', '', ''),
+(21, 8, 0, 0, 0, 0, 0, 0, '', '', '', ''),
+(21, 9, 0, 0, 0, 0, 0, 0, '', '', '', ''),
+(21, 10, 0, 0, 0, 0, 0, 0, '', '', '', ''),
+(57, 1, 1, 0, 0, 0, 0, 0, '', '', '', ''),
+(57, 2, 0, 0, 0, 0, 0, 1, '', '', '', ''),
+(57, 5, 0, 0, 1, 0, 0, 0, '', '', '', ''),
+(57, 6, 0, 0, 0, 0, 1, 0, '', '', '', ''),
+(57, 10, 1, 0, 0, 0, 0, 0, '', '', '', ''),
+(58, 3, 1, 0, 0, 0, 0, 0, '', '', '', ''),
+(58, 6, 0, 1, 0, 0, 0, 0, '', '', '', ''),
+(59, 6, 0, 0, 1, 0, 0, 0, '', '', '', ''),
+(59, 8, 1, 0, 0, 0, 0, 0, '', '', '', ''),
+(59, 9, 1, 0, 0, 0, 0, 0, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -166,7 +189,12 @@ INSERT INTO `usuario` (`id`, `Nombre`, `Sexo`, `Edad`, `Salario`, `Provincia`) V
 (51, 'SANDRA', 'F', 40, 345, 'Panama'),
 (52, 'KAREN', 'F', 24, 1000, 'Cocle'),
 (53, 'JINNETH', 'F', 45, 1233, 'Herrera'),
-(54, 'JUAN PEREZ', 'M', 43, 1200, 'Chiriqui');
+(54, 'JUAN PEREZ', 'M', 43, 1200, 'Chiriqui'),
+(55, 'PEPE', 'M', 21, 1212, 'Cocle'),
+(56, 'PEDRO', 'M', 23, 100, 'Cocle'),
+(57, 'XIMENA', 'F', 32, 1000, 'Cocle'),
+(58, 'ANGEL', 'M', 43, 1234, 'Panama'),
+(59, 'hola', 'M', 23, 4567, 'Colon');
 
 --
 -- Índices para tablas volcadas
@@ -183,7 +211,9 @@ ALTER TABLE `preguntas`
 -- Indices de la tabla `resultados`
 --
 ALTER TABLE `resultados`
-  ADD PRIMARY KEY (`idencuesta`,`idpregunta`);
+  ADD PRIMARY KEY (`idencuesta`,`idpregunta`),
+  ADD KEY `idencuesta` (`idencuesta`),
+  ADD KEY `idpregunta` (`idpregunta`);
 
 --
 -- Indices de la tabla `usuario`
@@ -200,12 +230,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `ID` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

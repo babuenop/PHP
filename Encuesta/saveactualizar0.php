@@ -2,7 +2,7 @@
 
 	<head>
 		<title>Modificar pregunta</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	
 	<body>
@@ -24,13 +24,13 @@
 				$opcion6 = $_POST['opcion6'];
 
 				
-				$query="UPDATE `PREGUNTAS` SET `PREGUNTA` = '$pregunta', `TIPO` = '$tipo', `OPCION1` = '$opcion1', `OPCION2` = '$opcion2', `OPCION3` = '$opcion3', `OPCION4` = '$opcion4', `OPCION5` = '$opcion5', `OPCION6` = '$opcion1' WHERE `PREGUNTAS`.`ID` = '$id'";
+				$query="UPDATE `PREGUNTAS` SET `PREGUNTA` = '$pregunta', `TIPO` = '$tipo', `OPCION1` = '$opcion1', `OPCION2` = '$opcion2', `OPCION3` = '$opcion3', `OPCION4` = '$opcion4', `OPCION5` = '$opcion5', `OPCION6` = '$opcion6' WHERE `PREGUNTAS`.`ID` = '$id'";
 				
 				$resultado=$conexion->query($query);							
 
 				if($resultado>0){
+				print "<script>alert(\"Pregunta Modificada\");window.location='../encuesta/mantenimiento.php';</script>";
 				?>
-				
 				<h1>Pregunta Modificada</h1>
 				
 					<?php 	}else{ ?>
