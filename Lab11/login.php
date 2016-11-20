@@ -1,7 +1,6 @@
 <?php
 
-error_reporting(E_ALL ^ E_NOTICE );
-
+error_reporting(0);
 session_start();
 
 if (isset($_REQUEST['usuario']) && isset ($_REQUEST['clave']));
