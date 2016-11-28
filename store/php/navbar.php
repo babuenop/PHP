@@ -5,9 +5,14 @@
       <a href="#"><img am-TopLogo alt="SECUREVIEW"  src="img/logo.png" class="img-responsive"></a>
     </div>
     <div class="col-xs-5 col-xs-offset-1 col-sm-5 col-sm-offset-0 text-right ">
-      <p am-CallNow>Contactenos</p>
+      <br>
+      <?php if(!isset($_SESSION["user_id"])):?>
+        <?php else:?>
+          <a type="button" class="btn btn-warning" am-latosans="bold" href="./canasta.php">Canasta</span><span class="badge"><b>4</b></span></a>
+       <?php endif;?>
     </div>
   </div> <!-- End Topper -->
+
   <!-- Navigation -->
   <div class="row">
     <nav class="navbar navbar-inverse" role="navigation">
@@ -26,22 +31,22 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav js-nav-add-active-class">
-            <?php if(!isset($_SESSION["user_id"])):?>
-            <li><a href="./">Home</a></li>
+            <?php if(!isset($_SESSION['"user_id"'])):?>
+            <li><a href="./">Inicio</a></li>
             <?php else:?>
-            <li><a href="./">Home</a></li>
-            <li class="active"><a href="./articulos.php">Markets</a></li>
-            <li><a href="/buy.html">Buy</a></li>
-            <li><a href="/svstrike.html">svStrike</a></li>
+              <li><a href="./">Inicio</a></li>
+             
+              <li><a href="./admin.php">Admin</a></li>
+             
             <?php endif;?>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-xs">
             <?php if(!isset($_SESSION["user_id"])):?>
-            <a type="button" class="navbar-btn btn btn-gradient-blue" am-latosans="bold" href="./registro.php">Crear Cuenta</a>
-            <a type="button" class="navbar-btn btn btn-gradient-blue" am-latosans="bold" href="./login.php">Login</a>
+            <a type="button" class="navbar-btn btn btn-default" am-latosans="bold" href="./registro.php">Crear Cuenta</a>
+            <a type="button" class="navbar-btn btn btn-default" am-latosans="bold" href="./login.php">Login</a>
             <?php else:?>
-            <a type="button" class="navbar-btn btn btn-gradient-blue" am-latosans="bold" href="./php/logout.php">Salir</a>  
+            <a type="button" class="navbar-btn btn btn-default" am-latosans="bold" href="./php/logout.php">Salir</a>  
             <?php endif;?>
           </ul>
 

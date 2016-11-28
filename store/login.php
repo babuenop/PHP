@@ -1,16 +1,18 @@
 <?php session_start(); ?>
 <html>
 	<head>
-		<title>Formulario de Registro</title>
+		<title>lOGIN</title>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
 	<?php include "php/navbar.php"; ?>
 <div class="container">
 <div class="row">
-<div class="col-md-6">
-		<h5>LOGIN</h5>
 
+		 <div class="page-header">
+          <h5>LOGIN<!-- Titulo --><small><!-- Subtitulo --></small></h5>
+        </div>   
+<div class="col-md-6">
 		<form role="form" name="login" action="php/login.php" method="post">
 		  <div class="form-group">
 		    <label for="username">Nombre de usuario o email</label>
