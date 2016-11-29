@@ -8,7 +8,10 @@
       <br>
       <?php if(!isset($_SESSION["user_id"])):?>
         <?php else:?>
+          <p class="alert alert-warning">Bienvenido <?php echo $_SESSION["username"];?> 
           <a type="button" class="btn btn-warning" am-latosans="bold" href="./canasta.php">Canasta</span><span class="badge"><b>4</b></span></a>
+          </p>
+         
        <?php endif;?>
     </div>
   </div> <!-- End Topper -->
@@ -35,14 +38,14 @@
             <li><a href="./">Inicio</a></li>
             <?php else:?>
               <li><a href="./">Inicio</a></li>
-             
-              <li><a href="./admin.php">Admin</a></li>
+              <li><a href="./carcarcontenido.php">Admin</a></li>
              
             <?php endif;?>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-xs">
             <?php if(!isset($_SESSION["user_id"])):?>
+               <li><a href="./registroarticulo.php">Admin</a></li>
             <a type="button" class="navbar-btn btn btn-default" am-latosans="bold" href="./registro.php">Crear Cuenta</a>
             <a type="button" class="navbar-btn btn btn-default" am-latosans="bold" href="./login.php">Login</a>
             <?php else:?>

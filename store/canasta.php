@@ -1,5 +1,7 @@
 <?php
 session_start();
+$userid=$_SESSION["user_id"];
+
 ?>
 
 <html>
@@ -15,7 +17,7 @@ session_start();
      <div class="page-header">
        <h5>CANASTA<small></small></h5>
      </div>
-
+     <h4><?php echo $userid;?></h4>
      <h4>Tu cesta está vacía.</h4>
       <p>Haz que tu cesta de compra sea útil: llénala de libros, CD, vídeos, DVD, juguetes, productos electrónicos y otros productos.
       <p>Vamos a comprar en Rock&Music <span><a href="./index.php">mas..</a></p>

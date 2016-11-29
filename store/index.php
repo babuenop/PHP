@@ -38,7 +38,7 @@
                     <!--   Cantidad en Stock -->
                       <p>In Stock <?php echo $row['stock'];?> Und</p>
                     <!--   Precio -->
-                      <h4><b>$ 4.50</b></h4>
+                      <h4><b>$ <?php echo $row['Precio'];?></b></h4>
                     <p>
                       <a href="./articulo.php" class="btn btn-info" role="button">Mas...</a> 
                       <a href="#" class="btn btn-warning" role="button">Agregar</a></p><br>

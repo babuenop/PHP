@@ -10,6 +10,7 @@ if(!empty($_POST)){
 			$query = $con->query($sql1);
 			while ($r=$query->fetch_array()) {
 				$user_id=$r["id"];
+				$username=$r["username"];
 				break;
 			}
 			if($user_id==null){
@@ -17,6 +18,7 @@ if(!empty($_POST)){
 			}else{
 				session_start();
 				$_SESSION["user_id"]=$user_id;
+				$_SESSION["username"]=$username;
 				print "<script>window.location='../index.php';</script>";				
 			}
 		}

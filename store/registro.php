@@ -10,7 +10,7 @@
 <div class="row">
 
        <div class="page-header">
-          <h5>CREAR CUENTA<!-- Titulo --><small><!-- Subtitulo --></small></h5>
+          <h5>CREAR CUENTA<!-- Titulo --><small></small></h5>
         </div>   
 <div class="col-md-6">
 		<form role="form" name="registro" action="php/registro.php" method="post">
