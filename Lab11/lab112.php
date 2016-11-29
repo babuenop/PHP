@@ -77,8 +77,6 @@ mysqli_close($conexion)
 }
 else 
 	{
-		print ("<BR><BR>\n");
-		print ("<p Align='CENTER'>Acceso no autorizado</p>\n");
-		print ("<p Align='CENTER'>[ <A HREF='login.php'>Conectar</A>]</p>\n");			
+		print "<script>alert(\"Debe registrarse o hacer login\");window.location='../login.php';</script>";		
 	}
 ?>

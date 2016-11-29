@@ -13,7 +13,7 @@ Echo($Articulo."<br>".$Detalle."<br>".$Precio."<br>".$Talla."<br>".$Stock."<br>"
 
 include ("conexion.php");
 
-$sql = "INSERT INTO `articulos` (`Idarticulo`, `Articulo`, `Precio`, `Detalle`, `Talla`, `stock`, `Imagen`, `Created`) VALUES (NULL, '$Articulo', '$Detalle', '$Precio', '$Talla', '$Stock', '$Imagen', 'Now()');";
+$sql = "INSERT INTO `articulos` (`Idarticulo`, `Articulo`, `Precio`, `Detalle`, `Talla`, `stock`, `Imagen`, `Created`) VALUES (NULL, '$Articulo', '$Precio', '$Detalle', '$Talla', '$Stock', '$Imagen', 'Now()');";
 
 	$query = $con->query($sql);
 

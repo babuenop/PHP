@@ -19,11 +19,7 @@ session_start();
      <h4>Pagina en Construccion</h4>
       <p>Vamos a comprar en Rock&Music <span><a href="./index.php">mas..</a></p>
       
-      <form action = "Load.php" method="post" enctype="multipart/form-data">
-      <input type="file" name="nombre_archivo_cliente" /><br/><br/>
-      <input type="submit" name="enviar" value="Enviar" />
-      </form>
-
+      
     </div>
   </div>
 

@@ -66,6 +66,7 @@ $userid=$_SESSION["user_id"];
         print ("<TH>Cantidad</TH>\n");
         print ("<TH>Subtotal</TH>\n");
         print ("<TH>Reservado el</TH>\n");
+        print ("<TH>Estado</TH>\n");
 
         
         print ("</TR>\n");
@@ -80,9 +81,13 @@ $userid=$_SESSION["user_id"];
         print ("<TD>" . $resultado['Articulo'] ."</TD>\n");
         print ("<TD>" . $resultado['Precio'] ."</TD>\n");
         print ("<TD>" . $resultado['Cantidad'] ."</TD>\n");      
+        
         $Subtotal=$resultado['Precio']*$resultado['Cantidad'];
         print ("<TD>$ " . $Subtotal ."</TD>\n");      
+        print ("<TD>" . $resultado['Status'] ."</TD>\n");      
+        
         $Total=$Total+$Subtotal;
+        
         print ("<TD>" . date("j/n/Y",strtotime($resultado['Fecha']))."</TD>\n");
         
         
@@ -95,16 +100,20 @@ $userid=$_SESSION["user_id"];
 
         print("<div class=label label-default>");
           print("<div class=input-group-addon>");
-             print("<h1>$".$Total."</h1>");
+             print("<h1>Monto$".$Total."</h1>");
             print("</a>
             </div>
-        </div></div></div></div>");      
+        </div></div></div></div>");     
+        ?><?php 
 }
         else{
+          print("<div>");
           print("<div class=jumbotron>");
           print ("<h1>Tu cesta está vacía.</h1>
-            <h3><p>Haz que tu cesta de compra sea útil: llénala de tshirt y otros productos.
+            <h3><p>Haz que tu cesta de compra sea útil: llénala de productos electrónicos y otros productos.
             <p>Vamos a comprar en Rock&Music <a href=./index.php>mas..</a></p></h3>");
+        print("</div>");
+          
         }
         mysqli_close ($con);
         ?>
