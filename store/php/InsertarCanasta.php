@@ -1,22 +1,31 @@
 <?php
 session_start(); 
-$Articulo =$_POST["Articulo"];
-$Detalle =$_POST["Detalle"];
-$Precio =$_POST["Precio"];
-$Talla =$_POST["Talla"];
-$Stock =$_POST["Stock"];
-$Imagen = $_POST["Imagen"];
+if (isset($_SESSION["user_id"]))
+{
 
-Echo($Articulo."<br>".$Detalle."<br>".$Precio."<br>".$Talla."<br>".$Stock."<br>".$Imagen);
+$UserId=$_POST["UserId"];
+$Idarticulo =$_POST["Idarticulo"];
+$Articulo =$_POST["Articulo"];
+$Precio =$_POST["Precio"];
+$Cantidad =$_POST["cantidad"];
+$Talla =$_POST["Talla"];
+$Status=$_POST["Status"];
+
 
 include ("conexion.php");
 
-$sql = "INSERT INTO `canasta` (`IdCanasta`, `UserId`, `IdArticulo`, `Articulo`, `Precio`, `Cantidad`, `Fecha`) VALUES (NULL, \'2\', \'3\', \'ertyuio\', \'4\', \'6\', \'2016-11-29 00:00:00\')";
+$sql = "INSERT INTO `canasta` (`IdCanasta`, `UserId`, `IdArticulo`, `Articulo`, `Precio`, `Cantidad`, `Fecha`, `Status`) VALUES (NULL, '$UserId', '$Idarticulo', '$Articulo', '$Precio', '$Cantidad', 'Now()','PENDIENTE');";
 
 	$query = $con->query($sql);
 
 			if($query!=null){
-				print "<script>alert(\"Registro exitoso. Proceda a logearse\");window.location='../index.php';</script>";
+				print "<script>alert(\"Registro exitoso. Continue Comprando\");window.location='../index.php';</script>";
 mysqli_close($conexion);
 }
+
+}
+else 
+	{
+		print "<script>alert(\"Debe registrarse o hacer Login\");window.location='../login.php';</script>";	
+	}
 ?>
