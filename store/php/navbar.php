@@ -9,7 +9,7 @@
       <?php if(!isset($_SESSION["user_id"])):?>
         <?php else:?>
           <p class="alert alert-warning">Bienvenido <?php echo $_SESSION["username"];?> 
-          <a type="button" class="btn btn-warning" am-latosans="bold" href="./canasta.php">Canasta</span><span class="badge"><b>4</b></span></a>
+          <a type="button" class="btn btn-warning" am-latosans="bold" href="./canasta.php">Canasta</span></a>
           </p>
          
        <?php endif;?>
