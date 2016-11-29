@@ -11,7 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
-    
+
   
 	<?php include "php/navbar.php"; ?>
     
@@ -22,7 +22,7 @@
         </div>   	
         <?php while($row=$resultado->fetch_assoc()){ ?>
           
-       
+      
           <div class="row">
              <div class="col-sm-6 col-md-4">
                <div class="thumbnail">
@@ -35,6 +35,8 @@
                   <div class="caption">
                     <!--   Nombre del Articulo -->
                       <h3><?php echo $row['Articulo'];?></h3> 
+                         
+
                     <!--   Detalle del Articulo -->
                       <p><?php echo $row['Detalle'];?></p>
                     <!--   Cantidad en Stock -->
@@ -42,12 +44,14 @@
                     <!--   Precio -->
                       <h4><b>$ <?php echo $row['Precio'];?></b></h4>
                     <p>
+                      
                       <a href="./articulo.php" class="btn btn-info" role="button">Mas...</a> 
-                      <a href="#" class="btn btn-warning" role="button">Agregar</a></p><br>
+                      <a href="./php/Insertarcanasta.php" class="btn btn-warning" role="button">Agregar</a></p><br>
                     </p>
                   </div>
                 </div>
               </div>
+              </form>
               <br>
             </div>
         <?php } ?>

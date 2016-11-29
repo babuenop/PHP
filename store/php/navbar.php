@@ -38,17 +38,15 @@
             <li><a href="./">Inicio</a></li>
             <?php else:?>
               <li><a href="./">Inicio</a></li>
-              <li><a href="./carcarcontenido.php">Admin</a></li>
-             
             <?php endif;?>
             </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right hidden-xs">
-            <?php if(!isset($_SESSION["user_id"])):?>
-               <li><a href="./registroarticulo.php">Admin</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+            <?php if(!isset($_SESSION["user_id"])):?>    
             <a type="button" class="navbar-btn btn btn-default" am-latosans="bold" href="./registro.php">Crear Cuenta</a>
             <a type="button" class="navbar-btn btn btn-default" am-latosans="bold" href="./login.php">Login</a>
             <?php else:?>
+            <li><a href="./Articulo_AdjuntarImagen.php">Crear Articulos</a></li>
             <a type="button" class="navbar-btn btn btn-default" am-latosans="bold" href="./php/logout.php">Salir</a>  
             <?php endif;?>
           </ul>
