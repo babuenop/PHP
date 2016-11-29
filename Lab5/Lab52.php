@@ -1,6 +1,6 @@
 <?php
 
-if (is_uploaded_file ($_FILES['nombre_archivo_cliente']['tmp_name']))
+if (is_uploaded_file ($_FILES['file']['tmp_name']))
 	{
 		$nombreDirectorio = "archivos/";
 		$nombrearchivo = $_FILES['nombre_archivo_cliente']['name'];
@@ -28,6 +28,6 @@ if (is_uploaded_file ($_FILES['nombre_archivo_cliente']['tmp_name']))
 		echo "El archivo se ha subido satisfactoriamente al directorio $nombreDirectorio <br>";		
 	}	
 	else
-echo "No se ha podido subir el erchivo"
+echo "No se ha podido subir el archivo"
 ?>
 
