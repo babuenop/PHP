@@ -67,6 +67,8 @@ $userid=$_SESSION["user_id"];
         print ("<TH>Subtotal</TH>\n");
         print ("<TH>Reservado el</TH>\n");
         print ("<TH>Estado</TH>\n");
+        print ("<TH>Editar</TH>\n");
+         print ("<TH>Borrar</TH>\n");
 
         
         print ("</TR>\n");
@@ -80,19 +82,18 @@ $userid=$_SESSION["user_id"];
         print ("<TD>" . $resultado['IdArticulo'] ."</TD>\n");
         print ("<TD>" . $resultado['Articulo'] ."</TD>\n");
         print ("<TD>" . $resultado['Precio'] ."</TD>\n");
-        print ("<TD>" . $resultado['Cantidad'] ."</TD>\n");      
+        print ("<TD class=editable>" . $resultado['Cantidad'] ."</TD>\n");      
         
         $Subtotal=$resultado['Precio']*$resultado['Cantidad'];
-        print ("<TD>$ " . $Subtotal ."</TD>\n");      
-        print ("<TD>" . $resultado['Status'] ."</TD>\n");      
-        
-        $Total=$Total+$Subtotal;
-        
+        print ("<TD>$ " . $Subtotal ."</TD>\n");           
         print ("<TD>" . date("j/n/Y",strtotime($resultado['Fecha']))."</TD>\n");
-        
-        
+        print ("<TD>" . $resultado['Status'] ."</TD>\n"); 
+
+        print ("<TD><button id=button1id name=button1id class=btn btn-warning>Edit</button></TD>");
+        print ("<TD><button id=button2id name=button2id class=btn btn-danger>Delete</TD>");
+        print ("<TD>");
         print ("</TR>\n");
-             
+        $Total=$Total+$Subtotal;             
         }
                print ("</TBODY>");
         print ("</TABLE>\n");
@@ -100,7 +101,7 @@ $userid=$_SESSION["user_id"];
 
         print("<div class=label label-default>");
           print("<div class=input-group-addon>");
-             print("<h1>Monto$".$Total."</h1>");
+             print("<h1><b>Total de la Orden $".$Total."</b></h1>");
             print("</a>
             </div>
         </div></div></div></div>");     
